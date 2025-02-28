@@ -1,5 +1,5 @@
 [package]
-name = "praxis-shop-v2-ui"
+name = "praxis-shop-ui"
 version = "0.1.0"
 edition = "2021"
 
@@ -31,3 +31,7 @@ cynic-codegen = "3.10.0"
 
 [dev-dependencies]
 web-sys = { version = "0.3.77", features = ["HtmlElement"] }
+
+[lib]
+name = "praxis_shop_ui"
+path = "src/lib.rs"
