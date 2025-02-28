@@ -1,0 +1,152 @@
+.progress-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  color: var(--forge-gold);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.goal-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--forge-orange);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.goal-item:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(255, 107, 53, 0.2);
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.goal-header h3 {
+  color: var(--forge-orange);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.task-count {
+  color: var(--forge-ash);
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 107, 53, 0.7),
+    rgba(255, 215, 0, 0.7)
+  );
+  border-radius: 15px;
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.task-list-container {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--forge-orange);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.task-list-container h3 {
+  color: var(--forge-orange);
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.task-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.task-title {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  color: var(--forge-ash);
+  transition:
+    color 0.2s ease,
+    text-decoration 0.2s ease;
+}
+
+.task-title.completed {
+  color: var(--forge-ash);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .progress-container {
+    padding: 1rem;
+  }
+
+  .goal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
