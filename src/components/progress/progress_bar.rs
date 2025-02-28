@@ -1,5 +1,4 @@
 use leptos::prelude::*;
-use thaw::*;
 use wasm_bindgen::prelude::*;
 
 // Import CSS module

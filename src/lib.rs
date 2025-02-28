@@ -1,4 +1,5 @@
 pub mod components;
+pub mod graphql;
 pub mod pages;
 pub use components::Navigation;
 pub use components::ProgressBar;
