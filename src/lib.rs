@@ -1,4 +1,7 @@
+pub mod components;
 pub mod pages;
+pub use components::Navigation;
+pub use components::ProgressBar;
 pub use pages::home::Home;
 
 use leptos::prelude::*;
@@ -10,6 +13,7 @@ pub fn App() -> impl IntoView {
     view! {
         <Router>
             <main>
+                <Navigation/>
                 <Routes fallback=move || view! { <p>"Not found."</p> }>
                     <ParentRoute
                         path=path!("")
@@ -18,6 +22,10 @@ pub fn App() -> impl IntoView {
                         <Route
                             path=path!("")
                             view=Home
+                        />
+                        <Route
+                            path=path!("progress")
+                            view=ProgressBar
                         />
                     </ParentRoute>
                 </Routes>
