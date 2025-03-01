@@ -2,11 +2,9 @@ use std::rc::Rc;
 
 use crate::graphql::queries::tasks::Task;
 use crate::services::service_context::ServiceContext;
-use futures::channel::oneshot;
+use futures::channel::oneshot::channel;
 use leptos::prelude::*;
 use leptos::task::spawn_local;
-
-type Refetch = Box<dyn Fn() + 'static>;
 
 pub struct TasksState {
     pub tasks: ReadSignal<Vec<Task>>,
@@ -43,12 +41,12 @@ pub fn use_tasks() -> TasksState {
     });
 
     // Actions
-    let create = create_action(move |task: &Task| {
+    let create = Action::new(move |task: &Task| {
         let task = task.clone();
         let service = service_create.clone();
 
         // Return a placeholder immediately
-        let (tx, rx) = futures::channel::oneshot::channel();
+        let (tx, rx) = channel();
 
         spawn_local(async move {
             let result = service.0.create_task(task).await;
@@ -58,12 +56,12 @@ pub fn use_tasks() -> TasksState {
         async move { rx.await.unwrap_or(Err("Action canceled".to_string())) }
     });
 
-    let update = create_action(move |task: &Task| {
+    let update = Action::new(move |task: &Task| {
         let task = task.clone();
         let service = service_update.clone();
         let id = task.id.clone().unwrap();
 
-        let (tx, rx) = futures::channel::oneshot::channel();
+        let (tx, rx) = channel();
 
         spawn_local(async move {
             let result = service.0.update_task(id, task).await;
@@ -73,11 +71,11 @@ pub fn use_tasks() -> TasksState {
         async move { rx.await.unwrap_or(Err("Action canceled".to_string())) }
     });
 
-    let delete = create_action(move |id: &cynic::Id| {
+    let delete = Action::new(move |id: &cynic::Id| {
         let id = id.clone();
         let service = service_delete.clone();
 
-        let (tx, rx) = futures::channel::oneshot::channel();
+        let (tx, rx) = channel();
 
         spawn_local(async move {
             let result = service.0.delete_task(id).await;

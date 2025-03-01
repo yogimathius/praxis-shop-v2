@@ -9,7 +9,6 @@ extern "C" {}
 #[component]
 pub fn GoalsList(
     goals: Vec<Goal>,
-    #[prop(into)] on_toggle: Action<Goal, Result<Goal, String>>,
     #[prop(into)] on_delete: Action<cynic::Id, Result<(), String>>,
     #[prop(into)] on_edit: Action<Goal, Result<Goal, String>>,
 ) -> impl IntoView {
@@ -23,7 +22,6 @@ pub fn GoalsList(
                         view! {
                             <GoalItem
                                 goal=goal.clone()
-                                on_toggle=on_toggle
                                 on_delete=on_delete
                                 on_edit=on_edit
                             />

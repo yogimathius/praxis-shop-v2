@@ -41,7 +41,6 @@ pub fn GoalForm(
         set_show_success.set(true);
         set_is_submitting.set(false);
 
-        let refetch = refetch.clone();
         spawn_local(async move {
             let _ = create.dispatch(goal);
             set_timeout(

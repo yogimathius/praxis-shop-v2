@@ -1,6 +1,7 @@
 use std::rc::Rc;
 
 use crate::graphql::queries::goals::Goal;
+use futures::channel::oneshot::channel;
 use leptos::prelude::*;
 use wasm_bindgen_futures::spawn_local;
 
@@ -45,7 +46,7 @@ pub fn use_goals() -> GoalsState {
         let service = service_create.clone();
 
         // Return a placeholder immediately
-        let (tx, rx) = futures::channel::oneshot::channel();
+        let (tx, rx) = channel();
 
         spawn_local(async move {
             let result: std::result::Result<Goal, String> = service.0.create_goal(goal).await;
@@ -61,7 +62,7 @@ pub fn use_goals() -> GoalsState {
             let service = service_update.clone();
             let id = goal.id.clone().unwrap();
 
-            let (tx, rx) = futures::channel::oneshot::channel();
+            let (tx, rx) = channel();
 
             spawn_local(async move {
                 let result = service.0.update_goal(id, goal).await;
@@ -75,7 +76,7 @@ pub fn use_goals() -> GoalsState {
         let id = id.clone();
         let service = service_delete.clone();
 
-        let (tx, rx) = futures::channel::oneshot::channel();
+        let (tx, rx) = channel();
 
         spawn_local(async move {
             let result = service.0.delete_goal(id).await;

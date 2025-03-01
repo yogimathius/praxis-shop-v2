@@ -16,7 +16,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-.dashboardTitle {
+.tasksTitle {
   font-size: 2rem;
   font-weight: 600;
   color: var(--forge-spark);
@@ -42,7 +42,7 @@
   backdrop-filter: blur(5px);
 }
 
-.dashboardTitle {
+.tasksTitle {
   font-size: 2rem;
   color: var(--forge-spark);
   margin-bottom: 1rem;
@@ -63,7 +63,7 @@
   }
 }
 
-.dashboardSubtitle {
+.tasksSubtitle {
   font-size: 1.25rem;
   color: var(--forge-ash);
   margin-bottom: 3rem;

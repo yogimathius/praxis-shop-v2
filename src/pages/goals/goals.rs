@@ -22,14 +22,13 @@ pub fn GoalsListPage() -> impl IntoView {
 
     view! {
         <div class="container">
-            <h2 class="dashboardTitle">"The Anvil"</h2>
-            <p class="dashboardSubtitle">"Mold your goals on the anvil of determination."</p>
+            <h2 class="tasksTitle">"The Anvil"</h2>
+            <p class="tasksSubtitle">"Mold your goals on the anvil of determination."</p>
             <GoalForm create=create.clone() refetch=refetch.clone() />
             {
                 let goals = goals.clone();
                 move || -> View<_> {
                     let goals = goals.get().clone();
-                    let on_toggle = update.clone();
                     let on_delete = delete.clone();
                     let on_edit = update.clone();
 
@@ -37,7 +36,6 @@ pub fn GoalsListPage() -> impl IntoView {
                         <div>
                             <GoalsList
                                 goals=goals
-                                on_toggle=on_toggle
                                 on_delete=on_delete
                                 on_edit=on_edit
                             />

@@ -11,10 +11,7 @@ pub enum Location {
 }
 
 #[wasm_bindgen(module = "/src/components/navigation/navigation.module.css")]
-extern "C" {
-    #[wasm_bindgen(js_name = "default")]
-    static STYLES: JsValue;
-}
+extern "C" {}
 
 #[component]
 pub fn Navigation() -> impl IntoView {
@@ -33,26 +30,16 @@ pub fn Navigation() -> impl IntoView {
                     </A>
                 </span>
             </div>
-            <div class="nav-item" class:active=move || location.get() == Location::Progress>
+            <div class="nav-item" class:active=move || location.get() == Location::Tasks>
                 <span class="link">
                     <A
-                        href="/progress"
-                        on:click=move |_| set_location.set(Location::Progress)
+                        href="/tasks"
+                        on:click=move |_| set_location.set(Location::Tasks)
                     >
-                        "Progress"
+                        "Tasks"
                     </A>
                 </span>
             </div>
-            // <div class="nav-item" class:active=move || location.get() == Location::Tasks>
-            //     <span class="link">
-            //         <A
-            //             href="/tasks"
-            //             on:click=move |_| set_location.set(Location::Tasks)
-            //         >
-            //             "Tasks"
-            //         </A>
-            //     </span>
-            // </div>
             <div class="nav-item" class:active=move || location.get() == Location::Goals>
                 <span class="link">
                     <A

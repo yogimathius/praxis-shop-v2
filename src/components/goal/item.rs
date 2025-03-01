@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use wasm_bindgen::prelude::wasm_bindgen;
 
+use crate::components::progress::ProgressBar;
 use crate::graphql::queries::goals::Goal;
 
 #[wasm_bindgen(module = "/src/components/goal/item.module.css")]
@@ -9,7 +10,6 @@ extern "C" {}
 #[component]
 pub fn GoalItem(
     goal: Goal,
-    #[prop(into)] on_toggle: Action<Goal, Result<Goal, String>>,
     #[prop(into)] on_delete: Action<cynic::Id, Result<(), String>>,
     #[prop(into)] on_edit: Action<Goal, Result<Goal, String>>,
 ) -> impl IntoView {
@@ -45,26 +45,13 @@ pub fn GoalItem(
                                     }
                                 })}
                                 <div class="progressInfo">
-                                    <span class="progressText">
-                                        "Tasks completed: "
-                                        {move || goal.get().tasks_completed.unwrap_or_default()}
-                                        " / "
-                                        {move || goal.get().tasks_required.unwrap_or_default()}
-                                    </span>
-                                    <div class="progressBar">
-                                        <div
-                                            class="progressFill"
-                                            style:width=move || {
-                                                let progress = if goal.get().tasks_required.unwrap_or_default() > 0 {
-                                                    (goal.get().tasks_completed.unwrap_or_default() as f32 /
-                                                     goal.get().tasks_required.unwrap_or_default() as f32 * 100.0) as i32
-                                                } else {
-                                                    0
-                                                };
-                                                format!("{}%", progress)
-                                            }
-                                        ></div>
-                                    </div>
+                                    {move || {
+                                        let current_goal = goal.get();
+                                        let goals_vec = vec![current_goal.clone()];
+                                        view! {
+                                            <ProgressBar goals=goals_vec />
+                                        }
+                                    }}
                                 </div>
                             }
                         }

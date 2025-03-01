@@ -2,13 +2,8 @@ use leptos::prelude::*;
 use wasm_bindgen::prelude::*;
 
 // Import CSS module
-#[wasm_bindgen(
-    module = "/src/components/progress/progress_bar.module.css",
-    thread_local_v2
-)]
-extern "C" {
-    static default: JsValue;
-}
+#[wasm_bindgen(module = "/src/components/progress/progress_bar.module.css")]
+extern "C" {}
 
 #[derive(Clone)]
 pub struct Task {
@@ -26,75 +21,30 @@ pub struct Goal {
 }
 
 #[component]
-pub fn ProgressBar() -> impl IntoView {
-    // Use the imported CSS module
-    let _ = default;
-
-    // Hardcoded tasks for demo
-    let tasks = vec![
-        Task {
-            id: 1,
-            title: "Complete documentation".to_string(),
-            completed: true,
-        },
-        Task {
-            id: 2,
-            title: "Write unit tests".to_string(),
-            completed: true,
-        },
-        Task {
-            id: 3,
-            title: "Fix UI bugs".to_string(),
-            completed: false,
-        },
-        Task {
-            id: 4,
-            title: "Performance optimization".to_string(),
-            completed: false,
-        },
-        Task {
-            id: 5,
-            title: "Deploy to staging".to_string(),
-            completed: false,
-        },
-    ];
-
-    // Hardcoded goals
-    let goals = vec![
-        Goal {
-            id: 1,
-            title: "Code Quality".to_string(),
-            tasks_required: 3,
-            tasks_completed: 2,
-        },
-        Goal {
-            id: 2,
-            title: "Feature Complete".to_string(),
-            tasks_required: 5,
-            tasks_completed: 3,
-        },
-        Goal {
-            id: 3,
-            title: "Production Ready".to_string(),
-            tasks_required: 8,
-            tasks_completed: 2,
-        },
-    ];
+pub fn ProgressBar(
+    #[prop(optional)] goals: Option<Vec<crate::graphql::queries::goals::Goal>>,
+) -> impl IntoView {
+    // Use provided goals or empty vec if None
+    let goals = goals.unwrap_or_default();
 
     view! {
         <div class="progress-container">
-            <h2 class="section-title">"Goal Progress"</h2>
-
             <div class="goals-list">
                 {goals.iter().map(|goal| {
-                    let progress_percentage = (goal.tasks_completed as f32 / goal.tasks_required as f32 * 100.0).round() as i32;
+                    let tasks_completed = goal.tasks_completed.unwrap_or(0);
+                    let tasks_required = goal.tasks_required.unwrap_or(1);
+                    let progress_percentage = if tasks_required > 0 {
+                        (tasks_completed as f32 / tasks_required as f32 * 100.0).round() as i32
+                    } else {
+                        0
+                    };
 
                     view! {
                         <div class="goal-item">
                             <div class="goal-header">
-                                <h3>{goal.title.clone()}</h3>
+                                <h3>{goal.title.clone().unwrap_or_default()}</h3>
                                 <span class="task-count">
-                                    {goal.tasks_completed} "/" {goal.tasks_required} " tasks"
+                                    {tasks_completed} "/" {tasks_required} " tasks"
                                 </span>
                             </div>
 
@@ -111,22 +61,6 @@ pub fn ProgressBar() -> impl IntoView {
                         </div>
                     }
                 }).collect::<Vec<_>>()}
-            </div>
-
-            <div class="task-list-container">
-                <h3>"Tasks"</h3>
-                <div class="task-list">
-                    {tasks.iter().map(|task| {
-                        view! {
-                            <div class="task-item">
-                                <thaw::Checkbox checked=task.completed/>
-                                <span class="task-title" class:completed=task.completed>
-                                    {task.title.clone()}
-                                </span>
-                            </div>
-                        }
-                    }).collect::<Vec<_>>()}
-                </div>
             </div>
         </div>
     }

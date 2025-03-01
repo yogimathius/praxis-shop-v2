@@ -4,9 +4,9 @@ pub mod pages;
 pub mod services;
 pub mod state;
 pub use components::Navigation;
-pub use components::ProgressBar;
 pub use pages::goals::GoalsListPage;
 pub use pages::home::Home;
+pub use pages::tasks::tasks::TasksListPage;
 use services::graphql_service::GraphQLService;
 use services::service_context::ServiceContext;
 
@@ -17,7 +17,6 @@ use std::sync::Arc;
 
 #[component]
 pub fn App() -> impl IntoView {
-    // let location_state = use_location();
     let service = GraphQLService::new();
 
     provide_context(ServiceContext(Arc::new(service)));
@@ -35,9 +34,13 @@ pub fn App() -> impl IntoView {
                             path=path!("")
                             view=Home
                         />
+                        // <Route
+                        //     path=path!("progress")
+                        //     view=ProgressBarPage
+                        // />
                         <Route
-                            path=path!("progress")
-                            view=ProgressBar
+                            path=path!("tasks")
+                            view=TasksListPage
                         />
                         <Route
                             path=path!("goals")
