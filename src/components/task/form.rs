@@ -77,45 +77,50 @@ pub fn TaskForm(
     view! {
         <form class="form" on:submit=on_submit>
             <div class="formGroup">
-                <input
-                    type="text"
-                    class="input"
-                    placeholder="Add a new task..."
-                    on:input=move |ev| set_task_text.set(event_target_value(&ev))
-                    prop:value=move || task_text.get()
-                />
-                <input
-                    type="text"
-                    class="input description"
-                    placeholder="Add a description..."
-                    on:input=move |ev| set_task_description.set(event_target_value(&ev))
-                    prop:value=move || task_description.get()
-                />
-                <select
-                    class="select"
-                    on:change=move |ev| {
-                        let value = event_target_value(&ev);
-                        set_selected_goal.set(value.parse::<i32>().ok());
-                    }
-                >
-                    <option value="">"Select a goal (optional)"</option>
-                    {move || goals.get().into_iter().map(|goal| {
-                        view! {
-                            <option value={goal.id.map(|id| id.inner().to_string()).unwrap_or_default()}>
-                                {goal.title.unwrap_or_default()}
-                            </option>
+                <div class="inputGroup">
+                    <input
+                        type="text"
+                        class="input"
+                        placeholder="Add a new task..."
+                        on:input=move |ev| set_task_text.set(event_target_value(&ev))
+                        prop:value=move || task_text.get()
+                    />
+                    <input
+                        type="text"
+                        class="input description"
+                        placeholder="Add a description..."
+                        on:input=move |ev| set_task_description.set(event_target_value(&ev))
+                        prop:value=move || task_description.get()
+                    />
+                </div>
+
+                <div class="selectGroup">
+                    <select
+                        class="select"
+                        on:change=move |ev| {
+                            let value = event_target_value(&ev);
+                            set_selected_goal.set(value.parse::<i32>().ok());
                         }
-                    }).collect_view()}
-                </select>
-                <select
-                    class="select"
-                    on:input=move |ev| set_task_status.set(event_target_value(&ev))
-                    prop:value=move || task_status.get()
-                >
-                    <option value="pending">"Pending"</option>
-                    <option value="in_progress">"In Progress"</option>
-                    <option value="completed">"Completed"</option>
-                </select>
+                    >
+                        <option value="">"Select a goal (optional)"</option>
+                        {move || goals.get().into_iter().map(|goal| {
+                            view! {
+                                <option value={goal.id.map(|id| id.inner().to_string()).unwrap_or_default()}>
+                                    {goal.title.unwrap_or_default()}
+                                </option>
+                            }
+                        }).collect_view()}
+                    </select>
+                    <select
+                        class="select"
+                        on:input=move |ev| set_task_status.set(event_target_value(&ev))
+                        prop:value=move || task_status.get()
+                    >
+                        <option value="pending">"Pending"</option>
+                        <option value="in_progress">"In Progress"</option>
+                        <option value="completed">"Completed"</option>
+                    </select>
+                </div>
                 <button
                     type="submit"
                     class="button"

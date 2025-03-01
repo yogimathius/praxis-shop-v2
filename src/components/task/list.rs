@@ -16,25 +16,37 @@ pub fn TasksList(
     #[prop(into)] on_delete: Action<cynic::Id, Result<(), String>>,
     #[prop(into)] on_edit: Action<Task, Result<Task, String>>,
 ) -> impl IntoView {
+    let tasks_clone = tasks.clone();
+
     view! {
         <div class="tasksContainer">
             <h2 class="listTitle">"Your Tasks"</h2>
-            <div class="tasksList">
-                {tasks
-                    .iter()
-                    .map(|task| {
-                        view! {
-                            <TaskItem
-                                task=task.clone()
-                                on_toggle=on_toggle
-                                on_delete=on_delete
-                                on_edit=on_edit
-                                goals=goals
-                            />
-                        }
-                    })
-                    .collect_view()}
-            </div>
+            <Show
+                when=move || !tasks_clone.is_empty()
+                fallback=|| view! {
+                    <div class="emptyState">
+                        <h3>"No tasks yet"</h3>
+                        <p>"Add your first task to get started on your journey."</p>
+                    </div>
+                }
+            >
+                <div class="tasksList">
+                    {tasks
+                        .iter()
+                        .map(|task| {
+                            view! {
+                                <TaskItem
+                                    task=task.clone()
+                                    on_toggle=on_toggle
+                                    on_delete=on_delete
+                                    on_edit=on_edit
+                                    goals=goals
+                                />
+                            }
+                        })
+                        .collect_view()}
+                </div>
+            </Show>
         </div>
     }
 }

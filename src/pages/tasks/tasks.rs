@@ -4,6 +4,7 @@ use crate::state::use_goals::{use_goals, GoalsState};
 use crate::state::use_tasks::{use_tasks, TasksState};
 use leptos::prelude::*;
 use wasm_bindgen::prelude::wasm_bindgen;
+
 #[wasm_bindgen(module = "/src/pages/tasks/tasks.module.css")]
 extern "C" {}
 
