@@ -33,7 +33,7 @@ pub fn Navigation() -> impl IntoView {
                     </A>
                 </span>
             </div>
-            <div class="nav-item" class:active=move || location.get() == Location::Goals>
+            <div class="nav-item" class:active=move || location.get() == Location::Progress>
                 <span class="link">
                     <A
                         href="/progress"

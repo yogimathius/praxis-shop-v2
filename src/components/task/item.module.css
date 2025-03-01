@@ -1,0 +1,166 @@
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border: 1px solid var(--forge-orange);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 8px rgba(255, 107, 53, 0.2);
+  transition: all 0.3s ease;
+}
+
+.taskItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  border-color: var(--forge-spark);
+}
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex: 1;
+}
+
+.taskContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.taskTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--forge-ash);
+}
+
+.description {
+  color: var(--forge-ash);
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.rightContent {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.statusSelect {
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--forge-orange);
+  appearance: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--forge-ash);
+  backdrop-filter: blur(5px);
+  padding-right: 2.5rem;
+  transition: all 0.2s ease;
+}
+
+.statusSelect[value="pending"] {
+  background-color: rgba(255, 107, 53, 0.2);
+  border-color: var(--forge-orange);
+}
+
+.statusSelect[value="in_progress"] {
+  background-color: rgba(255, 215, 0, 0.2);
+  border-color: var(--forge-spark);
+}
+
+.statusSelect[value="completed"] {
+  background-color: rgba(0, 255, 0, 0.2);
+  border-color: #00ff00;
+}
+
+.statusSelect:hover {
+  box-shadow: 0 0 10px var(--forge-orange);
+}
+
+.statusSelect:focus {
+  outline: none;
+  box-shadow: 0 0 15px var(--forge-orange);
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.editButton {
+  background-color: var(--forge-orange);
+  color: var(--forge-steel);
+}
+
+.editButton:hover {
+  background-color: transparent;
+  border-color: var(--forge-orange);
+  color: var(--forge-orange);
+  box-shadow: 0 0 10px var(--forge-orange);
+}
+
+.deleteButton {
+  background-color: var(--forge-red);
+  color: var(--forge-ash);
+}
+
+.deleteButton:hover {
+  background-color: transparent;
+  border-color: var(--forge-red);
+  color: var(--forge-red);
+  box-shadow: 0 0 10px var(--forge-red);
+}
+
+.taskItem input {
+  width: 100%;
+  padding: 8px;
+  margin: 4px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--forge-orange);
+  border-radius: 4px;
+  color: var(--forge-ash);
+}
+
+.taskItem input:focus {
+  outline: none;
+  border-color: var(--forge-spark);
+  box-shadow: 0 0 10px var(--forge-orange);
+}
+
+.saveButton {
+  background-color: var(--forge-spark);
+  color: var(--forge-steel);
+}
+
+.saveButton:hover {
+  background-color: transparent;
+  border-color: var(--forge-spark);
+  color: var(--forge-spark);
+  box-shadow: 0 0 10px var(--forge-spark);
+}
+
+.goalTag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: var(--forge-spark);
+  color: var(--forge-steel);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-left: 1rem;
+}

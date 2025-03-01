@@ -1,0 +1,84 @@
+:root {
+  --forge-orange: #ff6b35; /* Hot metal/flame color */
+  --forge-red: #cc3311; /* Ember glow */
+  --forge-steel: #2d3142; /* Dark steel */
+  --forge-iron: #4f5d75; /* Cooled metal */
+  --forge-spark: #ffd700; /* Spark highlights */
+  --forge-ash: #e6e8e6; /* Cool ash/background */
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--forge-steel), var(--forge-iron));
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dashboardTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--forge-spark);
+  text-align: center;
+  text-shadow: 0 0 10px var(--forge-orange);
+  animation: emberPulse 3s ease-in-out infinite;
+}
+
+.loadingContainer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--forge-ash);
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 1rem;
+  color: var(--forge-red);
+  background-color: rgba(204, 51, 17, 0.1);
+  border: 1px solid var(--forge-red);
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  backdrop-filter: blur(5px);
+}
+
+.dashboardTitle {
+  font-size: 2rem;
+  color: var(--forge-spark);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px var(--forge-orange);
+}
+
+@keyframes emberPulse {
+  0% {
+    text-shadow: 0 0 10px var(--forge-orange);
+  }
+  50% {
+    text-shadow:
+      0 0 25px var(--forge-orange),
+      0 0 50px var(--forge-red);
+  }
+  100% {
+    text-shadow: 0 0 10px var(--forge-orange);
+  }
+}
+
+.dashboardSubtitle {
+  font-size: 1.25rem;
+  color: var(--forge-ash);
+  margin-bottom: 3rem;
+  text-align: center;
+  opacity: 0.9;
+  animation: fadeSlideUp 1s ease-out;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
