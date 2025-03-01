@@ -53,16 +53,16 @@ pub fn Navigation() -> impl IntoView {
             //         </A>
             //     </span>
             // </div>
-            // <div class="nav-item" class:active=move || location.get() == Location::Goals>
-            //     <span class="link">
-            //         <A
-            //             href="/goals"
-            //             on:click=move |_| set_location.set(Location::Goals)
-            //         >
-            //             "Goals"
-            //         </A>
-            //     </span>
-            // </div>
+            <div class="nav-item" class:active=move || location.get() == Location::Goals>
+                <span class="link">
+                    <A
+                        href="/goals"
+                        on:click=move |_| set_location.set(Location::Goals)
+                    >
+                        "Goals"
+                    </A>
+                </span>
+            </div>
         </nav>
     }
 }

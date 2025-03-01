@@ -2,9 +2,10 @@ pub mod components;
 pub mod graphql;
 pub mod pages;
 pub mod services;
-
+pub mod state;
 pub use components::Navigation;
 pub use components::ProgressBar;
+pub use pages::goals::GoalsListPage;
 pub use pages::home::Home;
 use services::graphql_service::GraphQLService;
 use services::service_context::ServiceContext;
@@ -37,6 +38,10 @@ pub fn App() -> impl IntoView {
                         <Route
                             path=path!("progress")
                             view=ProgressBar
+                        />
+                        <Route
+                            path=path!("goals")
+                            view=GoalsListPage
                         />
                     </ParentRoute>
                 </Routes>

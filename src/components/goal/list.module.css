@@ -1,0 +1,36 @@
+.goalsContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.listTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--forge-spark);
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 0 10px var(--forge-orange);
+}
+
+.goalsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .goalsContainer {
+    padding: 1rem 0.5rem;
+  }
+
+  .listTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .goalsList {
+    gap: 1rem;
+  }
+}
