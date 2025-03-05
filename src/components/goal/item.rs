@@ -44,15 +44,6 @@ pub fn GoalItem(
                                         <p class="description">{desc.clone()}</p>
                                     }
                                 })}
-                                <div class="progressInfo">
-                                    {move || {
-                                        let current_goal = goal.get();
-                                        let goals_vec = vec![current_goal.clone()];
-                                        view! {
-                                            <ProgressBar goals=goals_vec />
-                                        }
-                                    }}
-                                </div>
                             }
                         }
                     >
@@ -106,6 +97,15 @@ pub fn GoalItem(
                 >
                     "Delete"
                 </button>
+            </div>
+            <div class="progressInfo">
+                {move || {
+                    let current_goal = goal.get();
+                    let goals_vec = vec![current_goal.clone()];
+                    view! {
+                        <ProgressBar goals=goals_vec />
+                    }
+                }}
             </div>
         </div>
     }

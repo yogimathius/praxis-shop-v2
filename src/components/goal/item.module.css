@@ -1,7 +1,10 @@
 .goalItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  grid-template-areas:
+    "title title buttons"
+    "description description description"
+    "progress progress progress";
+  gap: 1.5rem;
   padding: 2rem;
   border: 1px solid var(--forge-spark);
   border-radius: 16px;
@@ -23,8 +26,7 @@
 }
 
 .wrapper {
-  flex: 1;
-  margin-right: 2rem;
+  grid-area: title;
 }
 
 .goalContent {
@@ -34,7 +36,7 @@
 }
 
 .goalTitle {
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 600;
   color: var(--forge-spark);
   margin: 0;
@@ -42,6 +44,7 @@
 }
 
 .description {
+  grid-area: description;
   color: var(--forge-ash);
   opacity: 0.9;
   line-height: 1.6;
@@ -49,8 +52,21 @@
   font-size: 1.1rem;
 }
 
+.actions {
+  grid-area: buttons;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .progressInfo {
-  margin-top: 1.5rem;
+  grid-area: progress;
+  padding: 1.5rem;
+  background: rgba(45, 49, 66, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 107, 53, 0.2);
+  width: 100%;
 }
 
 .progressText {
@@ -73,11 +89,6 @@
   height: 100%;
   background: linear-gradient(90deg, var(--forge-orange), var(--forge-spark));
   transition: width 0.3s ease;
-}
-
-.actions {
-  display: flex;
-  gap: 1rem;
 }
 
 .button {
