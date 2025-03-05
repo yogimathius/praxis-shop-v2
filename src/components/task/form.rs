@@ -75,28 +75,28 @@ pub fn TaskForm(
     };
 
     view! {
-        <form class="form" on:submit=on_submit>
-            <div class="formGroup">
-                <div class="inputGroup">
+        <form class="task-form" on:submit=on_submit>
+            <div class="task-form-group">
+                <div class="task-input-group">
                     <input
                         type="text"
-                        class="input"
+                        class="task-input"
                         placeholder="Add a new task..."
                         on:input=move |ev| set_task_text.set(event_target_value(&ev))
                         prop:value=move || task_text.get()
                     />
                     <input
                         type="text"
-                        class="input description"
+                        class="task-input description"
                         placeholder="Add a description..."
                         on:input=move |ev| set_task_description.set(event_target_value(&ev))
                         prop:value=move || task_description.get()
                     />
                 </div>
 
-                <div class="selectGroup">
+                <div class="task-select-group">
                     <select
-                        class="select"
+                        class="task-select"
                         on:change=move |ev| {
                             let value = event_target_value(&ev);
                             set_selected_goal.set(value.parse::<i32>().ok());
@@ -112,7 +112,7 @@ pub fn TaskForm(
                         }).collect_view()}
                     </select>
                     <select
-                        class="select"
+                        class="task-select"
                         on:input=move |ev| set_task_status.set(event_target_value(&ev))
                         prop:value=move || task_status.get()
                     >
@@ -123,7 +123,7 @@ pub fn TaskForm(
                 </div>
                 <button
                     type="submit"
-                    class="button"
+                    class="task-button"
                     disabled=move || is_submitting.get()
                 >
                     {move || if is_submitting.get() { "Adding..." } else { "Add Task" }}
@@ -131,7 +131,7 @@ pub fn TaskForm(
             </div>
 
             {move || show_success.get().then(|| view! {
-                <div class="successMessage">
+                <div class="task-success-message">
                     "Task added successfully!"
                 </div>
             })}

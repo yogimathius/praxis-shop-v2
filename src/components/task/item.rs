@@ -18,7 +18,6 @@ pub fn TaskItem(
 ) -> impl IntoView {
     let (task, _) = signal(task);
 
-    // Use .get_untracked() for initial values since we don't need reactivity here
     let (status, set_status) = signal(task.get_untracked().status);
     let (is_editing, set_is_editing) = signal(false);
     let (edit_title, set_edit_title) = signal(task.get_untracked().title);
@@ -41,17 +40,17 @@ pub fn TaskItem(
     };
 
     view! {
-        <div class="taskItem">
-            <div class="wrapper">
-                <div class="taskContent">
+        <div class="task-item">
+            <div class="task-wrapper">
+                <div class="task-content">
                     <Show
                         when=move || is_editing.get()
                         fallback=move || {
                             view! {
-                                <p class="taskTitle">{move || task.get().title}</p>
+                                <p class="task-title">{move || task.get().title}</p>
                                 {move || task.get().description.as_ref().map(|desc| {
                                     view! {
-                                        <p class="description">{desc.clone()}</p>
+                                        <p class="task-description">{desc.clone()}</p>
                                     }
                                 })}
                             }
@@ -60,7 +59,7 @@ pub fn TaskItem(
                         <input
                             node_ref=title_input
                             type="text"
-                            class="editInput"
+                            class="task-edit-input"
                             value=edit_title.get()
                             on:change=move |ev| {
                                 set_edit_title.set(Some(event_target_value(&ev)));
@@ -69,7 +68,7 @@ pub fn TaskItem(
                         <input
                             node_ref=desc_input
                             type="text"
-                            class="editInput"
+                            class="task-edit-input"
                             value=edit_description.get()
                             on:change=move |ev| {
                                 set_edit_description.set(event_target_value(&ev));
@@ -78,34 +77,27 @@ pub fn TaskItem(
                     </Show>
                 </div>
             </div>
-            <div class="rightContent">
+            <div class="task-right-content">
                 <select
-                    class="statusSelect"
+                    class="task-status-select"
+                    prop:value=move || task.get().status.unwrap_or_default()
                     on:change=move |ev| {
-                        let new_status = event_target_value(&ev);
-                        set_status.set(Some(new_status.clone()));
                         let mut updated_task = task.get();
-                        updated_task.status = Some(new_status.clone());
-                        updated_task.completed = Some(new_status == "completed");
+                        updated_task.status = Some(event_target_value(&ev));
                         let _ = on_toggle.dispatch(updated_task);
                     }
-                    prop:value=move || status.get()
                 >
-                    {STATUSES.iter().map(|status| {
-                        view! {
-                            <option value={status.to_string()}>
-                                {status.to_string().replace("_", " ")}
-                            </option>
-                        }
-                    }).collect::<Vec<_>>()}
+                    <option value="pending">"Pending"</option>
+                    <option value="in_progress">"In Progress"</option>
+                    <option value="completed">"Completed"</option>
                 </select>
-                <div class="actions">
+                <div class="task-actions">
                     <Show
                         when=move || is_editing.get()
                         fallback=move || {
                             view! {
                                 <button
-                                    class="button editButton"
+                                    class="task-button task-edit-button"
                                     on:click=move |_| set_is_editing.set(true)
                                 >
                                     "Edit"
@@ -114,14 +106,14 @@ pub fn TaskItem(
                         }
                     >
                         <button
-                            class="button saveButton"
+                            class="task-button task-save-button"
                             on:click=handle_save
                         >
                             "Save"
                         </button>
                     </Show>
                     <button
-                        class="button deleteButton"
+                        class="task-button task-delete-button"
                         on:click=move |_| {
                             let _ = on_delete.dispatch(task.get().id.unwrap());
                         }
@@ -129,12 +121,12 @@ pub fn TaskItem(
                         "Delete"
                     </button>
                 </div>
+                {move || goal_name.get().map(|name| view! {
+                    <span class="task-goal-tag">
+                        {name}
+                    </span>
+                })}
             </div>
-            {move || goal_name.get().map(|name| view! {
-                <span class="goalTag">
-                    {name}
-                </span>
-            })}
         </div>
     }
 }

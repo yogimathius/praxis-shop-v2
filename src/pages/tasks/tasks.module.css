@@ -8,21 +8,31 @@
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  background: linear-gradient(135deg, var(--forge-steel), var(--forge-iron));
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(45, 49, 66, 0.95),
+    rgba(79, 93, 117, 0.95)
+  );
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 107, 53, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 .tasksTitle {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.5rem;
+  font-weight: 700;
   color: var(--forge-spark);
   text-align: center;
-  text-shadow: 0 0 10px var(--forge-orange);
-  animation: emberPulse 3s ease-in-out infinite;
+  text-shadow:
+    0 0 20px var(--forge-orange),
+    0 0 40px rgba(255, 107, 53, 0.4);
+  margin-bottom: 0.5rem;
+  animation: emberPulse 4s ease-in-out infinite;
 }
 
 .loadingContainer {
@@ -42,27 +52,6 @@
   backdrop-filter: blur(5px);
 }
 
-.tasksTitle {
-  font-size: 2rem;
-  color: var(--forge-spark);
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px var(--forge-orange);
-}
-
-@keyframes emberPulse {
-  0% {
-    text-shadow: 0 0 10px var(--forge-orange);
-  }
-  50% {
-    text-shadow:
-      0 0 25px var(--forge-orange),
-      0 0 50px var(--forge-red);
-  }
-  100% {
-    text-shadow: 0 0 10px var(--forge-orange);
-  }
-}
-
 .tasksSubtitle {
   font-size: 1.25rem;
   color: var(--forge-ash);
@@ -70,6 +59,26 @@
   text-align: center;
   opacity: 0.9;
   animation: fadeSlideUp 1s ease-out;
+  letter-spacing: 0.5px;
+}
+
+@keyframes emberPulse {
+  0% {
+    text-shadow:
+      0 0 20px var(--forge-orange),
+      0 0 40px rgba(255, 107, 53, 0.4);
+  }
+  50% {
+    text-shadow:
+      0 0 30px var(--forge-orange),
+      0 0 60px var(--forge-red),
+      0 0 100px rgba(255, 107, 53, 0.3);
+  }
+  100% {
+    text-shadow:
+      0 0 20px var(--forge-orange),
+      0 0 40px rgba(255, 107, 53, 0.4);
+  }
 }
 
 @keyframes fadeSlideUp {

@@ -19,18 +19,18 @@ pub fn TasksList(
     let tasks_clone = tasks.clone();
 
     view! {
-        <div class="tasksContainer">
-            <h2 class="listTitle">"Your Tasks"</h2>
+        <div class="tasks-container">
+            <h2 class="tasks-list-title">"Your Tasks"</h2>
             <Show
                 when=move || !tasks_clone.is_empty()
                 fallback=|| view! {
-                    <div class="emptyState">
+                    <div class="tasks-empty-state">
                         <h3>"No tasks yet"</h3>
                         <p>"Add your first task to get started on your journey."</p>
                     </div>
                 }
             >
-                <div class="tasksList">
+                <div class="tasks-list">
                     {tasks
                         .iter()
                         .map(|task| {

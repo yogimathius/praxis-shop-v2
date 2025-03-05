@@ -1,10 +1,10 @@
-.tasksContainer {
+.tasks-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 1.5rem 0;
 }
 
-.listTitle {
+.tasks-list-title {
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--forge-spark);
@@ -15,7 +15,7 @@
   padding-bottom: 1rem;
 }
 
-.listTitle::after {
+.tasks-list-title::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -31,14 +31,14 @@
   );
 }
 
-.tasksList {
+.tasks-list {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   animation: fadeIn 0.6s ease-out;
 }
 
-.emptyState {
+.tasks-empty-state {
   text-align: center;
   padding: 3rem 1rem;
   color: var(--forge-ash);
@@ -48,7 +48,7 @@
   margin: 2rem 0;
 }
 
-.emptyState h3 {
+.tasks-empty-state h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: var(--forge-spark);
