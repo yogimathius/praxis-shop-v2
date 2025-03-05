@@ -21,9 +21,9 @@ pub fn GoalsListPage() -> impl IntoView {
     } = use_goals();
 
     view! {
-        <div class="container">
-            <h2 class="tasksTitle">"The Anvil"</h2>
-            <p class="tasksSubtitle">"Mold your goals on the anvil of determination."</p>
+        <div class="goalsContainer">
+            <h2 class="goalsTitle">"The Anvil"</h2>
+            <p class="goalsSubtitle">"Mold your goals on the anvil of determination."</p>
             <GoalForm create=create.clone() refetch=refetch.clone() />
             {
                 let goals = goals.clone();

@@ -30,7 +30,7 @@ pub fn TasksListPage() -> impl IntoView {
     } = use_goals();
 
     view! {
-        <div class="container">
+        <div class="tasksContainer">
             <h2 class="tasksTitle">"Forge Operations"</h2>
             <p class="tasksSubtitle">"Shape your tasks into achievements, one strike at a time."</p>
             <TaskForm

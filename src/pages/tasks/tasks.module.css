@@ -7,7 +7,7 @@
   --forge-ash: #e6e8e6; /* Cool ash/background */
 }
 
-.container {
+.tasksContainer {
   max-width: 1000px;
   margin: 2rem auto;
   padding: 2.5rem;
